@@ -6,6 +6,7 @@ import SetupScreen from './components/SetupScreen';
 import WinnerOverlay from './components/WinnerOverlay';
 import Sidebar from './components/Sidebar';
 import GameBoard from './components/GameBoard';
+import Lobby from './components/Lobby';
 
 export default function App() {
   const gamePhase = useGameStore((state) => state.gamePhase);
@@ -13,6 +14,10 @@ export default function App() {
   // --- RENDER ---
   if (gamePhase === 'setup') {
     return <SetupScreen />;
+  }
+
+  if (gamePhase === 'lobby') {
+    return <Lobby />;
   }
 
   return (

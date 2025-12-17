@@ -11,6 +11,10 @@ export default function Sidebar() {
   const wallOrientation = useGameStore((state) => state.wallOrientation);
   const errorMsg = useGameStore((state) => state.errorMsg);
   
+  const mode = useGameStore((state) => state.mode);
+  const roomId = useGameStore((state) => state.roomId);
+  const playerId = useGameStore((state) => state.playerId);
+  
   const toggleOrientation = useGameStore((state) => state.toggleOrientation);
   const resetGame = useGameStore((state) => state.resetGame);
   const setGamePhase = useGameStore((state) => state.setGamePhase);
@@ -40,6 +44,13 @@ export default function Sidebar() {
           </button>
       </div>
 
+      {mode === 'online' && (
+        <div className="bg-purple-900/20 border border-purple-500/50 rounded-lg p-3 -mt-2 flex items-center justify-between">
+            <span className="text-xs text-purple-300 font-bold uppercase tracking-wider">Room Code</span>
+            <span className="font-mono font-bold text-white tracking-widest">{roomId}</span>
+        </div>
+      )}
+
       {/* Player Stats */}
       <div className="grid grid-cols-2 md:grid-cols-1 gap-3 md:gap-4 md:mt-2">
          {players.map((p, idx) => (
@@ -59,7 +70,12 @@ export default function Sidebar() {
                   <p.icon size={18} className="md:w-5 md:h-5" />
                </div>
                <div className="flex flex-col">
-                 <span className="font-bold text-sm md:text-lg leading-tight text-white">{p.name}</span>
+                 <span className="font-bold text-sm md:text-lg leading-tight text-white">
+                    {p.name}
+                    {mode === 'online' && p.uid === playerId && (
+                      <span className="ml-2 text-[10px] align-middle font-bold bg-white/20 px-1.5 py-0.5 rounded text-white uppercase tracking-wider">YOU</span>
+                    )}
+                 </span>
                  {currentPlayer === idx && winner === null && <span className="text-[10px] md:text-xs font-bold text-purple-400 uppercase tracking-wider animate-pulse">Active</span>}
                </div>
              </div>

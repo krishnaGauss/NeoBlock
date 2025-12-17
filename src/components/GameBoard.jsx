@@ -11,6 +11,8 @@ export default function GameBoard() {
   const wallOrientation = useGameStore((state) => state.wallOrientation);
   const winner = useGameStore((state) => state.winner);
   const errorMsg = useGameStore((state) => state.errorMsg);
+  const mode = useGameStore((state) => state.mode);
+  const isHost = useGameStore((state) => state.isHost);
   
   const movePlayer = useGameStore((state) => state.movePlayer);
   const placeWall = useGameStore((state) => state.placeWall);
@@ -90,7 +92,9 @@ export default function GameBoard() {
                 const isNeighbor = dist === 1;
                 const isOccupied = (players[0].r === r && players[0].c === c) || (players[1].r === r && players[1].c === c);
                 const blocked = isNeighbor ? isBlocked(p.r, p.c, r, c, walls) : true;
-                const isValidMove = winner === null && isNeighbor && !isOccupied && !blocked;
+                
+                const isMyTurn = mode === 'local' || (currentPlayer === 0 && isHost) || (currentPlayer === 1 && !isHost);
+                const isValidMove = winner === null && isNeighbor && !isOccupied && !blocked && isMyTurn;
 
                 // Styling goals
                 const isP1Goal = r === 0;

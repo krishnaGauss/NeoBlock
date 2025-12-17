@@ -25,20 +25,12 @@ export default function WinnerOverlay() {
               {players[winner].name}
             </span> dominates!
           </p>
-          <div className="flex gap-3">
             <button 
               onClick={onMenu}
-              className="flex-1 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-xl border border-white/10 transition-colors"
+              className="w-full py-4 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-lg shadow-purple-900/50 transition-all active:scale-95 border border-white/10"
             >
-              Menu
+              Return to Menu
             </button>
-            <button 
-              onClick={onRestart}
-              className="flex-[2] py-4 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-lg shadow-purple-900/50 transition-all active:scale-95 border border-white/10"
-            >
-              Re-Initialize
-            </button>
-          </div>
        </div>
     </div>
   );
