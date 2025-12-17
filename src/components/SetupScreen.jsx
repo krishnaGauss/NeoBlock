@@ -27,7 +27,7 @@ export default function SetupScreen() {
         <h1 className="text-6xl md:text-8xl font-black tracking-tighter italic mb-2 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 drop-shadow-[0_0_20px_rgba(168,85,247,0.5)]">
           NEO<span className="text-white">BLOCK</span>
         </h1>
-        <p className="text-indigo-300/60 uppercase tracking-[0.5em] text-sm mb-12">System Configuration</p>
+        <p className="text-indigo-300/60 uppercase tracking-[0.5em] text-sm mb-12">Can you reach the end?</p>
 
         {/* ERROR MESSAGE */}
         {errorMsg && (
