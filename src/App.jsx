@@ -4,6 +4,7 @@ import useGameStore from './store/gameStore';
 
 import SetupScreen from './components/SetupScreen';
 import WinnerOverlay from './components/WinnerOverlay';
+import InstructionOverlay from './components/InstructionOverlay';
 import Sidebar from './components/Sidebar';
 import GameBoard from './components/GameBoard';
 import Lobby from './components/Lobby';
@@ -45,6 +46,7 @@ export default function App() {
       `}</style>
       
       <WinnerOverlay />
+      <InstructionOverlay />
 
       <Sidebar />
 

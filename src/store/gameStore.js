@@ -27,10 +27,13 @@ const useGameStore = create((set, get) => ({
   winner: null,
   errorMsg: '',
   hasPlacedWall: false,
+  showInstructions: false,
 
   // --- ACTIONS ---
 
   setGamePhase: (phase) => set({ gamePhase: phase }),
+  
+  dismissInstructions: () => set({ showInstructions: false }),
 
   // 1. Local Game Init
   initLocalGame: (size, wallCount) => {
@@ -69,7 +72,8 @@ const useGameStore = create((set, get) => ({
       winner: null,
       errorMsg: '',
       hasPlacedWall: false,
-      gamePhase: 'playing'
+      gamePhase: 'playing',
+      showInstructions: true
     });
   },
 
@@ -204,7 +208,9 @@ const useGameStore = create((set, get) => ({
           winner,
           gamePhase: newPhase,
           isHost: amIHost,
-          hasPlacedWall: turnChanged ? false : get().hasPlacedWall
+          hasPlacedWall: turnChanged ? false : get().hasPlacedWall,
+          // Show instructions only if we just transitioned to playing
+          showInstructions: (status === 'playing' && get().gamePhase !== 'playing') ? true : get().showInstructions
       });
   },
 
