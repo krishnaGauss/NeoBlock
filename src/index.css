@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@import "tailwindcss";
-
 @layer utilities {
   .animate-grid {
     animation: grid-scroll 20s linear infinite;

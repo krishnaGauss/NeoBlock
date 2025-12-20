@@ -25,6 +25,7 @@ const useGameStore = create((set, get) => ({
   walls: [],
   wallOrientation: 'h',
   winner: null,
+  statusMsg: '',
   errorMsg: '',
   hasPlacedWall: false,
   showInstructions: false,
@@ -71,6 +72,7 @@ const useGameStore = create((set, get) => ({
       currentPlayer: 0,
       winner: null,
       errorMsg: '',
+      statusMsg: '',
       hasPlacedWall: false,
       gamePhase: 'playing',
       showInstructions: true
@@ -127,7 +129,7 @@ const useGameStore = create((set, get) => ({
 
   createOnlineRoom: async (size, wallCount) => {
       try {
-          set({ errorMsg: 'Creating room...' });
+          set({ statusMsg: 'Creating room...', errorMsg: '' });
           await signIn(); // Ensure Auth
           const code = await createRoom(size, wallCount);
           const uid = getCurrentUser().uid;
@@ -144,16 +146,17 @@ const useGameStore = create((set, get) => ({
               boardSize: size,
               maxWalls: wallCount,
               gamePhase: 'lobby', // Waiting for P2
-              errorMsg: '' // Clear loading message
+              errorMsg: '',
+              statusMsg: ''
           });
       } catch (e) {
-          set({ errorMsg: e.message });
+          set({ errorMsg: e.message, statusMsg: '' });
       }
   },
 
   joinOnlineRoom: async (code) => {
       try {
-          set({ errorMsg: 'Joining...' });
+          set({ statusMsg: 'Joining...', errorMsg: '' });
           await signIn(); // Ensure Auth
           await joinRoom(code);
           const uid = getCurrentUser().uid;
@@ -168,10 +171,11 @@ const useGameStore = create((set, get) => ({
               isHost: false, // Guest
               unsubscribeRoom: unsub,
               gamePhase: 'lobby', // Will switch to playing when data syncs
-              errorMsg: '' // Clear loading message
+              errorMsg: '',
+              statusMsg: ''
           });
       } catch (e) {
-          set({ errorMsg: e.message });
+          set({ errorMsg: e.message, statusMsg: '' });
       }
   },
 

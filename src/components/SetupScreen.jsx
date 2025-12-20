@@ -7,6 +7,7 @@ export default function SetupScreen() {
   const createOnlineRoom = useGameStore((state) => state.createOnlineRoom);
   const joinOnlineRoom = useGameStore((state) => state.joinOnlineRoom);
   const errorMsg = useGameStore((state) => state.errorMsg);
+  const statusMsg = useGameStore((state) => state.statusMsg);
 
   const [view, setView] = useState('menu'); // 'menu', 'local', 'online'
   const [joinCode, setJoinCode] = useState('');
@@ -92,6 +93,17 @@ export default function SetupScreen() {
                 <span>// WARFARE</span>
             </div>
         </div>
+
+        {/* STATUS MESSAGE */}
+        {statusMsg && (
+            <div className="mb-8 w-full max-w-md mx-auto relative group animate-in slide-in-from-top-4 fade-in duration-300">
+                <div className="absolute inset-0 bg-cyan-500/20 blur-md animate-pulse"></div>
+                <div className="relative bg-cyan-950/80 backdrop-blur-md border border-cyan-500/50 text-cyan-200 px-6 py-4 rounded font-mono text-sm flex items-center gap-3 cyber-button shadow-xl">
+                    <Wifi size={16} className="text-cyan-500 animate-pulse" />
+                    <span className="font-bold tracking-wide">{statusMsg}</span>
+                </div>
+            </div>
+        )}
 
         {/* ERROR MESSAGE */}
         {errorMsg && (
